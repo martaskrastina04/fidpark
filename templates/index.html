@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients from FidPark</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Clients from FidPark</h1>
+
+        <form action="{{ url_for('search_clients') }}" method="GET" class="search-form">
+            <select name="filter_by">
+                <option value="clientID">Client ID</option>
+                <option value="firstName">First Name</option>
+                <option value="lastNameOrCompany">Surename/Company</option>
+                <option value="persCodeOrRegNumber">Pers. c./reg. nr.</option>
+                <option value="email">Email</option>
+                <option value="mobile">Mobile</option>  
+            </select>
+            <input type="text" name="query" placeholder="Enter search term" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if request.args.get('query') %}
+            <div class="back-button">
+                <a href="{{ url_for('index') }}">
+                    &#8592; Show all Clients
+                </a>
+            </div>
+        {% endif %}
+
+        {% if clients %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Client ID</th>
+                        <th>First Name</th>
+                        <th>Surename/Company</th>
+                        <th>Pers. c./reg. nr.</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Balance</th>
+                        <th>Get Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                        <tr>
+                            <td>{{ client.clientID }}</td>
+                            <td>{{ client.firstName }}</td>
+                            <td>{{ client.lastNameOrCompany }}</td>
+                            <td>{{ client.persCodeOrRegNumber if client.persCodeOrRegNumber else ''}}</td>
+                            <td>{{ client.email if client.email else '' }}</td>
+                            <td>{{ client.mobile if client.mobile else '' }}</td>
+                            <td>{{ client.balance }}</td>
+                            <td><a href="{{ url_for('client_details', client_id=client.clientID) }}" class="view-details">View Details</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No clients available or failed to fetch data.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

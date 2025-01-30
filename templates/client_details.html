@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="back-button">
+        {% if request.referrer and 'search' in request.referrer %}
+            <a href="{{ request.referrer }}">
+                &#8592; Back to Search Results
+            </a>
+        {% else %}
+            <a href="{{ url_for('index') }}">
+                &#8592; Back to Clients List
+            </a>
+        {% endif %}
+    </div>
+    
+    <div class="container">
+        <h1>Client Details</h1>
+        
+        <p><strong>Client ID:</strong> {{ client.clientID }}</p>
+        <p><strong>Last Name/Company:</strong> {{ client.lastNameOrCompany if client.lastNameOrCompany else 'N/A' }}</p>
+        <p><strong>First Name:</strong> {{ client.firstName if client.firstName else 'N/A' }}</p>
+        <p><strong>Personal Code/Registration Number:</strong> {{ client.persCodeOrRegNumber if client.persCodeOrRegNumber else 'N/A' }}</p>
+        <p><strong>Email:</strong> {{ client.email if client.email else 'N/A' }}</p>
+        <p><strong>Mobile:</strong> {{ client.mobile if client.mobile else 'N/A' }}</p>
+        <p><strong>Date Created:</strong> {{ client.dateCreated if client.dateCreated else 'N/A' }}</p>
+        <p><strong>Last Change:</strong> {{ client.lastChangeDateTime if client.lastChangeDateTime else 'N/A' }} </p>
+        <p><strong>Balance:</strong> {{ client.balance if client.balance else 'N/A' }}</p>
+        <p><strong>Gender:</strong> {% if client.genderIsMale %} Male {% else %} Female {% endif %}</p>
+        <p><strong>City:</strong> {{ client.city if client.city else 'N/A' }}</p>
+        <p><strong>Street:</strong> {{ client.street if client.street else 'N/A' }}</p>
+        <p><strong>Country:</strong> {{ client.country if client.country else 'N/A' }}</p>
+        <p><strong>Credit Limit:</strong> {{ client.creditLimit if client.creditLimit else 'N/A' }}</p>
+        <p><strong>Contract End Date:</strong> {{ client.contractEndDate if client.contractEndDate else 'N/A' }}</p>
+    </div>
+    
+</body>
+</html>
