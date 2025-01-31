@@ -2,7 +2,7 @@
 ## Kā palaist kodu?
 ### Klonē projektu:
 git clone https://github.com/martaskrastina04/fidpark.git
-### Tālāk es izvēlos atvērt projektu Visual Studio Code
+### Tālāk es izvēlos atvērt projektu Visual Studio Code un atveru šeit ši projekta termināli, kur veicu nākamās darbības
 ### Izveido un aktivizē virtuālo vidi (windows)
 python -m venv venv
 ### Instalē nepieciešamās atkarības
